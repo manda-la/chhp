@@ -749,8 +749,8 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
         <div class="form-field full">
           <label>I am willing to… <span class="opt">(check all that apply)</span></label>
           <div class="radio-group">
-            <label class="checkbox-opt"><input type="checkbox" name="willing_info" value="yes"><span>Share historical information or documents</span></label>
-            <label class="checkbox-opt"><input type="checkbox" name="willing_photos" value="yes"><span>Share photographs of the home</span></label>
+            <label class="checkbox-opt"><input type="checkbox" name="info" value="yes"><span>Share historical information or documents</span></label>
+            <label class="checkbox-opt"><input type="checkbox" name="photos" value="yes"><span>Share photographs of the home</span></label>
           </div>
         </div>
       </div>
@@ -758,6 +758,10 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
         <button class="btn-primary" type="submit">Submit Expression of Interest</button>
       </div>
     </form>
+     <div id="thankYouMessage" style="display: none; text-align: center; padding: 40px;">
+        <h2>Thank you!</h2>
+        <p>Your interest has been recorded. We will be in touch soon.</p>
+      </div>
   </div>
 </section>
 
@@ -782,31 +786,15 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbxFiEGzWoTZIwAQdu656XPxmyEv1Ak1nxhQuEFo4njq4E-Xh-NbcrdgTs2M3pshDBDoVw/exec';
   const form = document.getElementById('plaqueForm');
-  
+  const messageDiv = document.getElementById('thankYouMessage');
+
   form.addEventListener('submit', (e) => {
-    // Stop the page from refreshing
     e.preventDefault();
     
-    // Check validation
-    if (!form.checkValidity()) {
-      alert("Please fill out all required fields.");
-      return;
-    }
+    fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
 
-    const btn = form.querySelector('button[type="submit"]');
-    btn.disabled = true;
-    btn.textContent = 'Submitting...';
-
-    fetch(scriptURL, { 
-      method: 'POST', 
-      body: new FormData(form), 
-      mode: 'no-cors' 
-    });
-
-    alert('Thank you! Your interest has been recorded.');
-    form.reset();
-    btn.disabled = false;
-    btn.textContent = 'Submit Expression of Interest';
+    form.style.display = 'none';
+    messageDiv.style.display = 'block';
   });
 </script>
 </body>
