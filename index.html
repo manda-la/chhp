@@ -780,17 +780,30 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
   });
 </script>
 <script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbxFiEGzWoTZIwAQdu656XPxmyEv1Ak1nxhQuEFo4njq4E-Xh-NbcrdgTs2M3pshDBDoVw/exec';
+  const scriptURL = '  const scriptURL = 'https://script.google.com/macros/s/AKfycbxFiEGzWoTZIwAQdu656XPxmyEv1Ak1nxhQuEFo4njq4E-Xh-NbcrdgTs2M3pshDBDoVw/exec';
   const form = document.getElementById('plaqueForm');
   
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-      .then(() => {
-        alert('Thank you! Your interest has been recorded.');
-        form.reset();
-      })
-      .catch(error => alert('Error! Please try again.'));
+    if (!form.checkValidity()) {
+      alert("Please fill out all required fields correctly.");
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    try {
+      await fetch(scriptURL, { method: 'POST', body: new FormData(form), mode: 'no-cors' });
+      alert('Thank you! Your interest has been recorded.');
+      form.reset();
+    } catch (error) {
+      alert('Oops! We couldn\'t connect to the server. Please check your internet and try again.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Submit Expression of Interest';
+    }
   });
 </script>
 </body>
