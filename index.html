@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chicago Historic Plaque Program — Preservation Chicago</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   Color Schemes
+   ============================================================ */
+:root {
+  --brand-blue:       #164870;   
+  --brand-blue-dark:  #0f3252;   
+  --brand-blue-light: #1e5f96;   
+  --brand-red:        #F22626;  
+  --brand-red-dark:   #c71e1e;  
+  --brand-black:      #000000;   
+  --brand-white:      #FFFFFF;
+  --brand-offwhite:   #F4F6F8;   
+  --brand-panel:      #EBF0F5;   
+  --brand-line:       #C8D4DE;   
+  --brand-muted:      #4A5568;   
+
+  /* Plaque Mockup */
+  --bronze-hi:   #C9A355;
+  --bronze-mid:  #8A6428;
+  --bronze-lo:   #5C3E10;
+  --bronze-dark: #3A2408;
+
+  --font-header: "Roboto", Arial, sans-serif;  
+  --font-body:   Verdana, Geneva, sans-serif;  
+  --max-w: 800px;
+  --max-w-wide: 1100px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--brand-offwhite);
+  color: var(--brand-black);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--brand-red); text-decoration: none; }
+a:hover { color: var(--brand-red-dark); text-decoration: underline; }
+
+/* ── Section shell ─────────────────────────────────────────── */
+.section { padding: 64px 32px; }
+.section + .section { border-top: 1px solid var(--brand-line); }
+.section.panel { background: var(--brand-white); }
+
+.inner { max-width: var(--max-w); margin: 0 auto; }
+.inner-wide { max-width: var(--max-w-wide); margin: 0 auto; }
+
+.section-label {
+  font-family: var(--font-header);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brand-blue);
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--brand-line);
+}
+
+.section h2 {
+  font-family: var(--font-header);
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin: 0 0 18px;
+  color: var(--brand-blue);
+}
+.section p {
+  color: var(--brand-muted);
+  margin: 0 0 14px;
+  line-height: 1.7;
+}
+.section p:last-child { margin-bottom: 0; }
+.section p strong { color: var(--brand-black); font-weight: 700; }
+
+/* ── SIGNATURE: Bronze plaque ──────────────────────────────── */
+.plaque-section {
+  background: var(--brand-blue);
+  padding: 72px 32px;
+  text-align: center;
+}
+.plaque-section .section-label {
+  justify-content: center;
+  color: rgba(255,255,255,0.5);
+}
+.plaque-section .section-label::after { display: none; }
+.plaque-section h2 {
+  color: var(--brand-white);
+  margin-bottom: 10px;
+}
+.plaque-section > .inner > p {
+  color: rgba(255,255,255,0.7);
+  max-width: 500px;
+  margin: 0 auto 48px;
+}
+
+.plaque-art {
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.plaque-oval {
+  width: 100%;
+  aspect-ratio: 1.45 / 1;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 35% 30%,
+    var(--bronze-hi) 0%,
+    var(--bronze-mid) 40%,
+    var(--bronze-lo) 80%,
+    var(--bronze-dark) 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(255,220,140,0.35),
+    inset 0 -4px 12px rgba(0,0,0,0.55),
+    0 8px 32px rgba(0,0,0,0.5),
+    0 2px 6px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10% 14%;
+  position: relative;
+  overflow: hidden;
+}
+.plaque-oval::before {
+  content: "";
+  position: absolute;
+  inset: 7%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201,163,85,0.4);
+  pointer-events: none;
+}
+.plaque-oval::after {
+  content: "";
+  position: absolute;
+  top: 8%; left: 12%; right: 38%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,240,180,0.2) 0%, transparent 80%);
+  pointer-events: none;
+}
+.plaque-line {
+  font-family: "Georgia", serif;
+  text-align: center;
+  color: rgba(255,240,195,0.88);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 -1px 0 rgba(255,230,140,0.2);
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  line-height: 1.15;
+}
+.plaque-line.year {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+.plaque-rule {
+  width: 52%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,163,85,0.55), transparent);
+  margin: 7px auto;
+  position: relative;
+  z-index: 1;
+}
+.plaque-line.owner {
+  font-size: clamp(0.68rem, 1.8vw, 0.9rem);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.plaque-line.org {
+  font-size: clamp(0.56rem, 1.3vw, 0.7rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,240,195,0.6);
+  margin-top: 6px;
+}
+.plaque-caption {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.38);
+  font-style: italic;
+  font-family: var(--font-body);
+}
+
+.plaque-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 44px;
+  text-align: left;
+}
+.plaque-detail {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px;
+  padding: 16px 18px;
+}
+.plaque-detail .label {
+  font-family: var(--font-header);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 6px;
+}
+.plaque-detail .value {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+}
+
+/* ── Eligibility grid ──────────────────────────────────────── */
+.eligibility-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+.eligibility-item {
+  border-left: 3px solid var(--brand-red);
+  padding: 14px 16px;
+  background: var(--brand-panel);
+}
+.eligibility-item strong {
+  display: block;
+  font-family: var(--font-header);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  margin-bottom: 5px;
+}
+.eligibility-item p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--brand-muted);
+  line-height: 1.5;
+}
+
+/* ── Process steps ─────────────────────────────────────────── */
+.steps { margin-top: 32px; }
+.step {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 0 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--brand-line);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: var(--font-header);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--brand-line);
+  line-height: 1;
+  padding-top: 3px;
+  text-align: right;
+}
+.step-body strong {
+  display: block;
+  font-family: var(--font-header);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  margin-bottom: 5px;
+}
+.step-body p { margin: 0; font-size: 0.87rem; }
+
+/* ── Notice ────────────────────────────────────────────────── */
+.notice {
+  background: var(--brand-panel);
+  border: 1px solid var(--brand-line);
+  border-left: 4px solid var(--brand-blue);
+  padding: 16px 20px;
+  border-radius: 2px;
+  margin-top: 28px;
+  font-size: 0.84rem;
+  color: var(--brand-muted);
+  line-height: 1.6;
+}
+.notice strong { color: var(--brand-black); }
+
+/* ── FAQ ───────────────────────────────────────────────────── */
+.faq-list { margin-top: 32px; }
+.faq-item { border-top: 1px solid var(--brand-line); }
+.faq-item:last-child { border-bottom: 1px solid var(--brand-line); }
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-header);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--brand-blue);
+  line-height: 1.3;
+}
+.faq-q svg {
+  flex-shrink: 0;
+  width: 16px; height: 16px;
+  color: var(--brand-red);
+  transition: transform .2s;
+}
+.faq-item.open .faq-q svg { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .25s ease; }
+.faq-item.open .faq-a { max-height: 400px; }
+.faq-a p {
+  padding-bottom: 18px;
+  margin: 0;
+  font-size: 0.87rem;
+  color: var(--brand-muted);
+  line-height: 1.65;
+}
+
+/* ── Interest form ─────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 32px;
+}
+.form-field { display: flex; flex-direction: column; gap: 5px; }
+.form-field.full { grid-column: 1 / -1; }
+
+.form-field label {
+  font-family: var(--font-header);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand-black);
+}
+.form-field label .opt {
+  font-weight: 400;
+  color: var(--brand-muted);
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.72rem;
+}
+.form-field input,
+.form-field textarea,
+.form-field select {
+  font-family: var(--font-body);
+  font-size: 0.87rem;
+  color: var(--brand-black);
+  border: 1px solid var(--brand-line);
+  border-radius: 2px;
+  padding: 9px 12px;
+  background: var(--brand-white);
+  outline: none;
+  width: 100%;
+  transition: border-color .15s, box-shadow .15s;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(22,72,112,0.12);
+}
+.form-field textarea { resize: vertical; min-height: 90px; }
+
+.radio-group { display: flex; flex-direction: column; gap: 10px; margin-top: 2px; }
+.radio-opt, .checkbox-opt {
+  display: flex; align-items: flex-start; gap: 9px; cursor: pointer;
+}
+.radio-opt input, .checkbox-opt input {
+  width: auto; margin-top: 2px; accent-color: var(--brand-blue);
+}
+.radio-opt span, .checkbox-opt span {
+  font-size: 0.87rem; color: var(--brand-muted); line-height: 1.4;
+}
+
+.form-submit {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--brand-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.form-submit p {
+  font-size: 0.8rem; color: var(--brand-muted);
+  margin: 0; max-width: 420px; line-height: 1.5;
+}
+.btn-primary {
+  background: var(--brand-red);
+  color: var(--brand-white);
+  font-family: var(--font-header);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: none;
+  padding: 13px 26px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background .15s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: var(--brand-red-dark); }
+
+/* ── Mockup bar ────────────────────────────────────────────── */
+.mockup-bar {
+  background: var(--brand-blue);
+  color: rgba(255,255,255,0.4);
+  font-family: var(--font-header);
+  font-size: 0.72rem;
+  text-align: center;
+  padding: 12px 32px;
+}
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.55);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0 20px;
+}
+.hero-content h1 {
+  font-family: "Roboto", Arial, sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  color: #fff;
+  line-height: 1.08;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+.hero-content p {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.82);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .plaque-details { grid-template-columns: 1fr; }
+  .eligibility-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-field.full { grid-column: 1; }
+  .form-submit { flex-direction: column; align-items: flex-start; }
+  .section { padding: 48px 20px; }
+  .hero { padding: 52px 20px 60px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <img src="https://architecturehereandthere.com/wp-content/uploads/2015/01/dsc_0015-1.jpg" alt="Chicago historic architecture" />
+  <div class="hero-content">
+    <h1>Chicago Historic<br>Plaque Program</h1>
+    <p>Helping homeowners recognize and celebrate the architectural and historical significance of their home.</p>
+  </div>
+</section>
+
+<!-- Why This Matters -->
+<section class="section">
+  <div class="inner">
+    <p class="section-label">Why This Matters</p>
+    <h2>The homes between the landmarks matter too.</h2>
+    <p>Chicago's historic neighborhoods are defined not only by landmark buildings, but by the many individual homes that together create a distinctive architectural fabric. Each year, historic residences are lost to demolition, redevelopment, or significant alteration.</p>
+    <p>The Chicago Historic Plaque Program is designed to help homeowners and neighbors better understand the history of these properties — and recognize the importance of preserving them.</p>
+    <p>This pilot is expected to begin in selected historic areas of Lincoln Park, including the Sheffield Historic District and nearby historic residential blocks.</p>
+  </div>
+</section>
+
+<!-- The Plaque -->
+<section class="plaque-section">
+  <div class="inner">
+    <p class="section-label">The Plaque</p>
+    <h2>A dignified marker with a timeless format.</h2>
+    <p>Each plaque is a cast bronze oval designed to be mounted on a building or displayed on a freestanding stake — a permanent recognition of the home's place in Chicago's history.</p>
+
+    <div class="plaque-art" role="img" aria-label="Illustration of a sample Chicago Historic Plaque: 1889, Built by Frank Lloyd Wright, Preservation Chicago">
+      <div class="plaque-oval">
+        <span class="plaque-line year">1889</span>
+        <div class="plaque-rule"></div>
+        <span class="plaque-line owner">Built by Frank Lloyd Wright</span>
+        <div class="plaque-rule"></div>
+        <span class="plaque-line org">Preservation Chicago</span>
+      </div>
+      <p class="plaque-caption">Sample rendering — final size, format, and wording subject to Preservation Chicago review.</p>
+    </div>
+
+    <div class="plaque-details">
+      <div class="plaque-detail">
+        <div class="label">Vendor</div>
+        <div class="value">Bronze Memorial Company in Broadview, Illinois, which has extensive experience producing historic plaques, including landmark plaques for the City of Chicago.
+</div>
+      </div>
+      <div class="plaque-detail">
+        <div class="label">Optional Digital Story Layer</div>
+        <div class="value">A future phase of the program may include an optional digital “story tag” or QR-code feature linking to additional historical information about participating homes.
+</div>
+      </div>
+      <div class="plaque-detail">
+        <div class="label">Typical content</div>
+        <div class="value">Date of construction · Original owner, builder, or notable historic use · Preservation Chicago</div>
+      </div>
+      <div class="plaque-detail">
+        <div class="label">Mounting options</div>
+        <div class="value">Building-mounted or freestanding / staked, depending on property conditions and homeowner preference</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Eligibility -->
+<section class="section">
+  <div class="inner">
+    <p class="section-label">Eligibility</p>
+    <h2>Who may qualify for the pilot program.</h2>
+    <p>The pilot is expected to focus on homes with documented historic or architectural significance. Final eligibility standards will be set by Preservation Chicago as the program develops. Potential factors include:</p>
+    <div class="eligibility-grid">
+      <div class="eligibility-item">
+        <strong>Age</strong>
+        <p>The age of the home connects it to architectural eras and significant events, and influences its historical context.</p>
+      </div>
+      <div class="eligibility-item">
+        <strong>Architectural character</strong>
+        <p>Properties that retain original or notable architectural features contributing to the historic streetscape.</p>
+      </div>
+      <div class="eligibility-item">
+        <strong>Historic district location</strong>
+        <p>Location within or near a recognized historic district, such as the Sheffield Historic District in Lincoln Park.</p>
+      </div>
+      <div class="eligibility-item">
+        <strong>Historic association</strong>
+        <p>Connection to a notable original owner, builder, architect, or documented historic use of the property.</p>
+      </div>
+    </div>
+    <div class="notice">
+      <strong>Please note:</strong> Participation in the Chicago Historic Plaque Program does not mean that a property is landmarked, listed on a historic registry, protected from demolition, or eligible for any tax benefit. The program is intended for education, recognition, and preservation awareness only.
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section panel">
+  <div class="inner">
+    <p class="section-label">How It Works</p>
+    <h2>From inquiry to installation.</h2>
+    <p>The program is expected to follow these steps. Details remain subject to Preservation Chicago review as the pilot develops.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Homeowner inquiry</strong>
+          <p>A homeowner expresses interest through this page or by contacting Preservation Chicago directly.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Initial review</strong>
+          <p>Preservation Chicago or a designated research assistant conducts an initial review to determine whether the property appears to qualify.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Research and verification</strong>
+          <p>Basic historical information is researched or reviewed — including construction date, original owner or builder, and relevant historical context.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Plaque text approval</strong>
+          <p>Proposed plaque wording is reviewed by Preservation Chicago before production to ensure consistency and accuracy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Ordering and payment</strong>
+          <p>The homeowner receives final cost information and payment instructions. Payment structure is still being determined.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <strong>Production and delivery</strong>
+          <p>Once approved and paid for, the plaque is produced and shipped to the homeowner or designated address.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <strong>Installation</strong>
+          <p>Installation is expected to be handled by the homeowner. Mounting guidance will be provided.</p>
+        </div>
+      </div>
+    </div>
+    <div class="notice">
+      <strong>Cost:</strong> Final pricing has not yet been determined. The total may include the plaque, mounting option, shipping, taxes, and a modest research or administrative fee. Preservation Chicago will confirm the cost structure before the pilot launches.
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="inner">
+    <p class="section-label">Frequently Asked Questions</p>
+    <h2>Common questions about the program.</h2>
+    <div class="faq-list" role="list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Does a plaque mean my home is landmarked?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>No. The plaque is an educational and recognition marker only. It does not create landmark status, historic registry status, or any legal protection for the property.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Will this protect my home from demolition?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>No. The plaque itself does not create any legal protection against demolition or alteration. If you are concerned about your home's legal protection, Preservation Chicago can point you toward landmark designation resources.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Who verifies the information on the plaque?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>The research and verification process is still being developed. Preservation Chicago expects to review key historical details — construction date, original owner or builder — before approving plaque production.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can I suggest the wording for my plaque?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>Homeowners may provide information and suggest wording, but final plaque language will be reviewed by Preservation Chicago for consistency and accuracy before production.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Who installs the plaque?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>Installation is expected to be handled by the homeowner. Mounting guidance will be provided with the plaque.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How much will it cost?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>Final pricing has not yet been determined. Cost will depend on plaque size, mounting option, production, shipping, taxes, and any research or administrative fee. Preservation Chicago will confirm pricing before the pilot launches.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          When will the pilot program launch?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><p>Timing is still being developed. Preservation Chicago is currently reviewing program structure, website needs, vendor options, and homeowner interest. Submitting an expression of interest through this page helps the program move forward.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interest Form -->
+<section class="section panel" id="interest">
+  <div class="inner">
+    <p class="section-label">Express Interest</p>
+    <h2>Interested in a historic plaque for your home?</h2>
+    <p>Preservation Chicago is currently gauging homeowner interest for the pilot program. Submitting this form does not commit you to participation or any cost — a representative will follow up as the program develops.</p>
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="f-name">Full name</label>
+        <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name">
+      </div>
+      <div class="form-field">
+        <label for="f-email">Email address</label>
+        <input type="email" id="f-email" placeholder="jane@example.com" autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label for="f-phone">Phone number <span class="opt">(optional)</span></label>
+        <input type="tel" id="f-phone" placeholder="(312) 555-0100" autocomplete="tel">
+      </div>
+      <div class="form-field">
+        <label for="f-address">Property address</label>
+        <input type="text" id="f-address" placeholder="1234 N. Lincoln Ave., Chicago, IL">
+      </div>
+      <div class="form-field full">
+        <label for="f-history">Any known history of the home <span class="opt">(optional)</span></label>
+        <textarea id="f-history" placeholder="Construction date, original owner or builder, architect, notable history, or anything else you know about your home…"></textarea>
+      </div>
+      <div class="form-field full">
+        <label>Preferred mounting option</label>
+        <div class="radio-group">
+          <label class="radio-opt"><input type="radio" name="mounting" value="building"><span>Building-mounted plaque</span></label>
+          <label class="radio-opt"><input type="radio" name="mounting" value="freestanding"><span>Freestanding / staked plaque</span></label>
+          <label class="radio-opt"><input type="radio" name="mounting" value="either" checked><span>Either option works for me</span></label>
+        </div>
+      </div>
+      <div class="form-field full">
+        <label>I am willing to… <span class="opt">(check all that apply)</span></label>
+        <div class="radio-group">
+          <label class="checkbox-opt"><input type="checkbox" name="willing" value="info"><span>Share historical information or documents about the home</span></label>
+          <label class="checkbox-opt"><input type="checkbox" name="willing" value="photos"><span>Share photographs of the home (historic or current)</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="form-submit">
+      <button class="btn-primary" type="button">Submit Expression of Interest</button>
+    </div>
+  </div>
+</section>
+
+<div class="mockup-bar">WIP</div>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+</body>
+</html>
