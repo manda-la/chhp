@@ -496,13 +496,16 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
 
 <!-- Hero -->
 <section class="hero">
-  <img src="https://architecturehereandthere.com/wp-content/uploads/2015/01/dsc_0015-1.jpg" alt="Chicago historic architecture" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/East_Ravenswood_Historic_District_Chicago_IL.jpg/1920px-East_Ravenswood_Historic_District_Chicago_IL.jpg?_=20100828205524" alt="Chicago historic architecture" />
   <div class="hero-content">
     <h1>Chicago Historic<br>Plaque Program</h1>
     <p>Helping homeowners recognize and celebrate the architectural and historical significance of their home.</p>
   </div>
 </section>
-
+<!-- Attribution Caption -->
+<div style="text-align: center; font-size: 0.7rem; color: #666; padding: 5px;">
+  Photo: <a href="https://commons.wikimedia.org/wiki/File:East_Ravenswood_Historic_District_Chicago_IL.jpg">East Ravenswood Historic District</a> by Andrew Jameson, licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+</div>
 <!-- Why This Matters -->
 <section class="section">
   <div class="inner">
@@ -712,51 +715,53 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
   <div class="inner">
     <p class="section-label">Express Interest</p>
     <h2>Interested in a historic plaque for your home?</h2>
-    <p>Preservation Chicago is currently gauging homeowner interest for the pilot program. Submitting this form does not commit you to participation or any cost — a representative will follow up as the program develops.</p>
-    <div class="form-grid">
-      <div class="form-field">
-        <label for="f-name">Full name</label>
-        <input type="text" id="f-name" placeholder="Jane Smith" autocomplete="name">
-      </div>
-      <div class="form-field">
-        <label for="f-email">Email address</label>
-        <input type="email" id="f-email" placeholder="jane@example.com" autocomplete="email">
-      </div>
-      <div class="form-field">
-        <label for="f-phone">Phone number <span class="opt">(optional)</span></label>
-        <input type="tel" id="f-phone" placeholder="(312) 555-0100" autocomplete="tel">
-      </div>
-      <div class="form-field">
-        <label for="f-address">Property address</label>
-        <input type="text" id="f-address" placeholder="1234 N. Lincoln Ave., Chicago, IL">
-      </div>
-      <div class="form-field full">
-        <label for="f-history">Any known history of the home <span class="opt">(optional)</span></label>
-        <textarea id="f-history" placeholder="Construction date, original owner or builder, architect, notable history, or anything else you know about your home…"></textarea>
-      </div>
-      <div class="form-field full">
-        <label>Preferred mounting option</label>
-        <div class="radio-group">
-          <label class="radio-opt"><input type="radio" name="mounting" value="building"><span>Building-mounted plaque</span></label>
-          <label class="radio-opt"><input type="radio" name="mounting" value="freestanding"><span>Freestanding / staked plaque</span></label>
-          <label class="radio-opt"><input type="radio" name="mounting" value="either" checked><span>Either option works for me</span></label>
+    <p>Preservation Chicago is currently gauging homeowner interest for the pilot program. Submitting this form does not commit you to participation or any cost. A representative will follow up as the program develops.</p>
+    <form id="plaqueForm">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="f-name">Full name</label>
+          <input type="text" id="f-name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="f-email">Email address</label>
+          <input type="email" id="f-email" name="email" required>
+        </div>
+        <div class="form-field">
+          <label for="f-phone">Phone number</label>
+          <input type="tel" id="f-phone" name="phone">
+        </div>
+        <div class="form-field">
+          <label for="f-address">Property address</label>
+          <input type="text" id="f-address" name="address" required>
+        </div>
+        <div class="form-field full">
+          <label for="f-history">Any known history of the home (optional)</label>
+          <textarea id="f-history" name="history"></textarea>
+        </div>
+        <div class="form-field full">
+          <label>Preferred mounting option</label>
+          <div class="radio-group">
+            <label class="radio-opt"><input type="radio" name="mounting" value="building"><span>Building-mounted</span></label>
+            <label class="radio-opt"><input type="radio" name="mounting" value="freestanding"><span>Freestanding</span></label>
+            <label class="radio-opt"><input type="radio" name="mounting" value="either" checked><span>Either</span></label>
+          </div>
+        </div>
+        <div class="form-field full">
+          <label>I am willing to… <span class="opt">(check all that apply)</span></label>
+          <div class="radio-group">
+            <label class="checkbox-opt"><input type="checkbox" name="willing_info" value="yes"><span>Share historical information or documents</span></label>
+            <label class="checkbox-opt"><input type="checkbox" name="willing_photos" value="yes"><span>Share photographs of the home</span></label>
+          </div>
         </div>
       </div>
-      <div class="form-field full">
-        <label>I am willing to… <span class="opt">(check all that apply)</span></label>
-        <div class="radio-group">
-          <label class="checkbox-opt"><input type="checkbox" name="willing" value="info"><span>Share historical information or documents about the home</span></label>
-          <label class="checkbox-opt"><input type="checkbox" name="willing" value="photos"><span>Share photographs of the home (historic or current)</span></label>
-        </div>
+      <div class="form-submit">
+        <button class="btn-primary" type="submit">Submit Expression of Interest</button>
       </div>
-    </div>
-    <div class="form-submit">
-      <button class="btn-primary" type="button">Submit Expression of Interest</button>
-    </div>
+    </form>
   </div>
 </section>
 
-<div class="mockup-bar">WIP</div>
+<div class="mockup-bar">All Rights Reserved.</div>
 
 <script>
   document.querySelectorAll('.faq-q').forEach(btn => {
@@ -772,6 +777,20 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
         btn.setAttribute('aria-expanded', 'true');
       }
     });
+  });
+</script>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbxFiEGzWoTZIwAQdu656XPxmyEv1Ak1nxhQuEFo4njq4E-Xh-NbcrdgTs2M3pshDBDoVw/exec';
+  const form = document.getElementById('plaqueForm');
+  
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+      .then(() => {
+        alert('Thank you! Your interest has been recorded.');
+        form.reset();
+      })
+      .catch(error => alert('Error! Please try again.'));
   });
 </script>
 </body>
