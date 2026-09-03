@@ -122,83 +122,7 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
   max-width: 100%;
   margin: 0 auto;
 }
-.plaque-oval {
-  width: 100%;
-  aspect-ratio: 1.45 / 1;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 35% 30%,
-    var(--bronze-hi) 0%,
-    var(--bronze-mid) 40%,
-    var(--bronze-lo) 80%,
-    var(--bronze-dark) 100%);
-  box-shadow:
-    inset 0 3px 8px rgba(255,220,140,0.35),
-    inset 0 -4px 12px rgba(0,0,0,0.55),
-    0 8px 32px rgba(0,0,0,0.5),
-    0 2px 6px rgba(0,0,0,0.35);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10% 14%;
-  position: relative;
-  overflow: hidden;
-}
-.plaque-oval::before {
-  content: "";
-  position: absolute;
-  inset: 7%;
-  border-radius: 50%;
-  border: 1.5px solid rgba(201,163,85,0.4);
-  pointer-events: none;
-}
-.plaque-oval::after {
-  content: "";
-  position: absolute;
-  top: 8%; left: 12%; right: 38%;
-  height: 28%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(255,240,180,0.2) 0%, transparent 80%);
-  pointer-events: none;
-}
-.plaque-line {
-  font-family: "Georgia", serif;
-  text-align: center;
-  color: rgba(255,240,195,0.88);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.6), 0 -1px 0 rgba(255,230,140,0.2);
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  line-height: 1.15;
-}
-.plaque-line.year {
-  font-size: clamp(1.4rem, 4vw, 2rem);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  margin-bottom: 4px;
-}
-.plaque-rule {
-  width: 52%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(201,163,85,0.55), transparent);
-  margin: 7px auto;
-  position: relative;
-  z-index: 1;
-}
-.plaque-line.owner {
-  font-size: clamp(0.68rem, 1.8vw, 0.9rem);
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: 0.03em;
-}
-.plaque-line.org {
-  font-size: clamp(0.56rem, 1.3vw, 0.7rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,240,195,0.6);
-  margin-top: 6px;
-}
+
 .plaque-caption {
   margin-top: 20px;
   font-size: 0.75rem;
@@ -513,7 +437,7 @@ a:hover { color: var(--brand-red-dark); text-decoration: underline; }
     <h2>The homes between the landmarks matter too.</h2>
     <p>Chicago's historic neighborhoods are defined not only by landmark buildings, but by the many individual homes that together create a distinctive architectural fabric. Each year, historic residences are lost to demolition, redevelopment, or significant alteration.</p>
     <p>The Chicago Historic Plaque Program is designed to help homeowners and neighbors better understand the history of these properties — and recognize the importance of preserving them. Participating homeowners may receive a short researched summary of their home’s history, based on available records.</p>
-    <p>This pilot is expected to begin in selected historic areas of Lincoln Park, including the Sheffield Historic District and nearby historic residential blocks.</p>
+    <p>This pilot has begun in selected historic areas of Lincoln Park, including the Sheffield Historic District and nearby historic residential blocks.</p>
   </div>
 </section>
 
